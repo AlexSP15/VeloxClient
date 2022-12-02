@@ -22,18 +22,14 @@
                 <img src="img/logo.png" id="icon" alt="User Icon" />
             </div>
 
-            <div id="liveAlertPlaceholder"></div>
             <!-- Login Form -->
             <form>
-                <input type="email" id="loginEmail" class="fadeIn second" name="login" placeholder="Usuario">
-                <input type="password" id="loginPassword" class="fadeIn third" name="login" placeholder="Contraseña">
-                <input type="button" id="btnlogin" class="fadeIn fourth" onclick="comprobar()" value="Iniciar Sesión">
+                <h1>Crear Cuenta</h1>
+                <input type="text" id="txtName" class="fadeIn second" name="name" placeholder="Nombre">
+                <input type="email" id="txtEmail" class="fadeIn second" name="email" placeholder="Usuario">
+                <input type="password" id="txtPassword" class="fadeIn third" name="password" placeholder="Contraseña">
+                <input type="button" onclick="addUser()" class="fadeIn fourth" value="Crear Cuenta">
             </form>
-
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="registro.html">¿Aún no tiene cuenta?</a>
-            </div>
 
         </div>
     </div>
@@ -42,7 +38,6 @@
     <script src="js/index.js"></script>
     <script src="js/BD.js"></script>
     <script src="js/usuariosDB.js"></script>
-
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>

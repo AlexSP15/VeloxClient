@@ -31,7 +31,8 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
-      }
+      },
+      "cordova-sqlite-storage": {}
     }
   },
   "dependencies": {

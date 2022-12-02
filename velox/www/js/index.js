@@ -1,29 +1,117 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
-// Wait for the deviceready event before using any of Cordova's device APIs.
-// See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 document.addEventListener('deviceready', onDeviceReady, false);
 
+var cursor = {
+    id: -1,
+    nombre: '',
+    email: '',
+    contraseña: '',
+};
+
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
+    base_datos.createDB();
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
+}
+
+function addUser() {
+    var nombre = document.getElementById('txtName').value;
+    var email = document.getElementById('txtEmail').value;
+    var password = document.getElementById('txtPassword').value;
+
+    if (nombre == null || nombre == '') {
+        alert('Favor de ingresar el nombre');
+    } else if (email == null || email == '') {
+        alert('Favor de ingresar el email');
+    } else if (password == null || password == '') {
+        alert('Favor de ingresar la contraseña');
+    } else {
+        usuarios.addUser(nombre, email, password);
+        $('#txtName').val('');
+        $('#txtEmail').val('');
+        $('#txtPassword').val('');
+        window.location.href = 'index.html';
+    }
+}
+
+function comprobar() {
+    usuarios.loadUser(mostrarUsuario);
+}
+
+function mostrarUsuario(resultado) {
+    console.log(resultado.rows);
+    var length = resultado.rows.length;
+
+    var email = document.getElementById('loginEmail').value;
+    var password = document.getElementById('loginPassword').value;
+
+    var comprobar = 0;
+
+    for (var i = 0; i < length; i++) {
+        var item = resultado.rows.item(i);
+
+        if (item.email === email && item.contraseña === password) {
+            comprobar = 1;
+            console.log('existe el user');
+        } else {
+            console.log('no exists');
+        }
+    }
+
+    if (comprobar === 1) {
+        window.location.href = 'https://professor-falken.com';
+    } else {
+        if (comprobar === 0) {
+            console.log('alerta');
+
+            const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+
+            const alert = (message, type) => {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = [
+                    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                    `   <div>${message}</div>`,
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    '</div>',
+                ].join('');
+
+                alertPlaceholder.append(wrapper);
+            };
+
+            alert('¡Email y/o contraseña incorrecto!', 'danger');
+
+            setTimeout(function() {
+                $('.alert').fadeOut(1000);
+            }, 3000);
+
+            $email = document.querySelector('#loginEmail');
+            $email.focus();
+
+            $('#loginPassword').val('');
+        }
+    }
+    console.log(comprobar);
+}
+
+function deleteUser() {
+    var respuesta = confirm('¿Deseas eliminar el usuario?');
+
+    if (respuesta) {
+        usuarios.deleteUser(cursor.id);
+        usuarios.loadUser(mostrarUsuario);
+    }
+
+    $('#popupUpdateDelete').popup('close');
+}
+
+$(document).on('pagebeforeshow', '#updatedialog', function() {
+    $('#txtNewName').val(cursor.nombre);
+    $('#txtNewQuantity').val(cursor.cantidad);
+});
+
+function updateUser() {
+    var nuevoNombre = $('#txtNewName').val();
+    var nuevaCantidad = $('#txtNewQuantity').val();
+
+    usuarios.updateUser(cursor.id, nuevoNombre, nuevaCantidad);
+    $('#popupUpdateDelete').dialog('close');
 }
