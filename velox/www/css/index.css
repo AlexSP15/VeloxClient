@@ -1,5 +1,4 @@
-/* BASIC */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 html {
     background-color: #0C1059;
 }
@@ -350,4 +349,176 @@ input[type=text]:placeholder {
 #icon {
     margin-top: 15px;
     width: 35%;
+}
+
+.title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 46px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.title:hover {
+    color: white;
+}
+
+.card-home {
+    position: absolute;
+    width: 80%;
+    height: 15%;
+    background: #FAFAFA;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    margin-top: -50px;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.card-bienvenida {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 37px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.card-menu {
+    margin-left: 10%;
+    margin-top: 100px;
+    width: 80%;
+    margin-right: 10%;
+    border-radius: 25px;
+}
+
+.cardMenuBody {
+    justify-content: space-between;
+    display: flex;
+}
+
+.imgIconMenu {
+    width: 70px;
+    margin-right: 10px;
+}
+
+.titleMenu {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: #333333;
+}
+
+.divBack {
+    align-items: center;
+    display: flex;
+}
+
+.imgBack {
+    width: 35px;
+}
+
+.estatus {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: #333333;
+}
+
+.estatusInfo {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    color: #1B219F;
+}
+
+.infoEnvioLabel {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    color: #0C1059;
+}
+
+.infoEnvio {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.titlePrin {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 37px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cardPrincipal {
+    background: #FAFAFA;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 80px;
+}
+
+.btnConsultar {
+    background-color: #0C1059;
+    padding: 10px 20px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFAFA;
+}
+
+.txtNumGuia {
+    border-radius: 10px !important;
+    padding: 9px 30px !important;
+    margin: 0 !important;
+    font-size: 20px !important;
+    width: 100% !important;
 }
