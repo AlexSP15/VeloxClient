@@ -28,6 +28,7 @@ var base_datos = {
                     alert('No se creó la base de datos, verifica la función');
                 }
             );
+
             tx.executeSql(
                 'CREATE TABLE IF NOT EXISTS Agenda(id integer primary key, nombre text, telefono integer, email text, ubicacion text)', [],
                 function(tx, resultado) {

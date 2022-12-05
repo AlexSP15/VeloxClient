@@ -3,11 +3,12 @@ var agenda = {
         base_datos.bd.transaction(
             function(tx) {
                 tx.executeSql(
-                    'INSERT INTO agenda(nombre, telefono, email,ubicacion) VALUES (?1, ?2, ?3, ?4)', [nombre, telefono, email, ubicacion],
+                    'INSERT INTO Agenda(nombre, telefono, email, ubicacion) VALUES (?1, ?2, ?3, ?4)', [nombre, telefono, email, ubicacion],
                     function(tx, resultado) {
                         alert('Se añadió correctamente');
                     },
                     function(tx, error) {
+                        console.log(error);
                         alert('No se añadió, revisa la conexión');
                     }
                 );

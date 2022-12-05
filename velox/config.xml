@@ -11,7 +11,7 @@
     <platform name="android">
         <preference name="AndroidWindowSplashScreenIconBackgroundColor" value="#ffffff" />
     </platform>
-    <content src="recoleccion.html" />
+    <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 </widget>

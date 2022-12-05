@@ -4,6 +4,8 @@ function onDeviceReady() {
     console.log('listo');
 }
 
+var coordsMap = [];
+
 var color = ['FF0000', '00FF00', '000000'];
 
 function cambiarColor(index) {
@@ -53,11 +55,10 @@ function onSuccess(position) {
     coord1 = position.coords.latitude;
     coord2 = position.coords.longitude;
 
-    coordsMap = [coord1, coord2];
+    coordsMap.push(coord1);
+    coordsMap.push(coord2);
 
     console.log(coordsMap);
-
-    return coordsMap;
 }
 
 function onError(err) {
@@ -69,33 +70,39 @@ function addRecoleccion() {
     var telefono = document.getElementById('txtTelefonoRecoleccion').value;
     var email = document.getElementById('txtEmailRecoleccion').value;
 
-    console.log(coordsUbicacion);
-    var lat = coordsUbicacion[0];
-    var long = coordsUbicacion[1];
+    console.log(coordsMap);
+    var lat = coordsMap[0];
+    var long = coordsMap[1];
     var ubicacion = 'https://www.google.com/maps/@' + lat + ',' + long + ',21z';
 
     if (nombre == null || nombre == '') {
         alert('Favor de ingresar el nombre');
         cambiarColor(0);
+        cambiarColor(2);
     } else if (telefono == null || telefono == '') {
         alert('Favor de ingresar el teléfono');
         cambiarColor(0);
+        cambiarColor(2);
     } else if (email == null || email == '') {
         alert('Favor de ingresar el email');
         cambiarColor(0);
+        cambiarColor(2);
     } else if (lat == null || lat == '') {
         console.log(ubicacion);
         alert('Favor presiona Detectar Ubicación');
         cambiarColor(0);
+        cambiarColor(2);
     } else {
         console.log(lat);
         console.log(long);
         console.log(ubicacion);
+        console.log(nombre, telefono, email, ubicacion);
         agenda.addAgenda(nombre, telefono, email, ubicacion);
         $('#txtNombreRecoleccion').val('');
         $('#txtTelefonoRecoleccion').val('');
         $('#txtEmailRecoleccion').val('');
         cambiarColor(1);
+        cambiarColor(2);
         window.location.href = 'home.html';
     }
 }
