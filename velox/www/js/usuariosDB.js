@@ -5,18 +5,58 @@ var usuarios = {
                 tx.executeSql(
                     'INSERT INTO usuario(nombre, email, contraseña) VALUES (?1, ?2, ?3)', [nombre, email, contraseña],
                     function(tx, resultado) {
-                        alert('El usuario se añadió correctamente');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderRegistro'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('El usuario de añadió correctamente', 'success');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     },
                     function(tx, error) {
-                        alert('El usuario no se añadió, revisa la conexión');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderRegistro'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('El usuario no se añadió, revisa la conexión', 'warning');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     }
                 );
             },
             function(error) {
-                alert('Tenemos un problema' + error.message);
+                console.log('Tenemos un problema' + error.message);
             },
             function() {
-                alert('Todo bien');
+                console.log('Todo bien');
             }
         );
     },
@@ -71,7 +111,27 @@ var usuarios = {
                         mostrarUsuario(resultado);
                     },
                     function(tx, error) {
-                        alert('Carga no válida, revisa la conexión');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholder'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('Carga no válida, revisa la conexión', 'warning');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     }
                 );
             },

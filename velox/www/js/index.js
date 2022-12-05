@@ -2,14 +2,12 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 var cursor = {
     id: -1,
-    nombre: '',
-    email: '',
-    contraseña: '',
+    estatus: '',
 };
 
 function onDeviceReady() {
     base_datos.createDB();
-    //addEnvio();
+
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
 }
 
@@ -30,16 +28,83 @@ function addUser() {
     var password = document.getElementById('txtPassword').value;
 
     if (nombre == null || nombre == '') {
-        alert('Favor de ingresar el nombre');
+        const alertPlaceholder = document.getElementById(
+            'liveAlertPlaceholderRegistro'
+        );
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>',
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };
+
+        alert('¡Favor de ingresar el nombre!', 'warning');
+
+        setTimeout(function() {
+            $('.alert').fadeOut(1000);
+        }, 1500);
+
         cambiarColor(0);
+        cambiarColor(2);
     } else if (email == null || email == '') {
-        alert('Favor de ingresar el email');
+        const alertPlaceholder = document.getElementById(
+            'liveAlertPlaceholderRegistro'
+        );
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>',
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };
+
+        alert('¡Favor de ingresar el email!', 'warning');
+
+        setTimeout(function() {
+            $('.alert').fadeOut(1000);
+        }, 1500);
+
         cambiarColor(0);
+        cambiarColor(2);
     } else if (password == null || password == '') {
-        alert('Favor de ingresar la contraseña');
+        const alertPlaceholder = document.getElementById(
+            'liveAlertPlaceholderRegistro'
+        );
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>',
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };
+
+        alert('¡Favor de ingresar la contraseña!', 'warning');
+
+        setTimeout(function() {
+            $('.alert').fadeOut(1000);
+        }, 1500);
+
         cambiarColor(0);
+        cambiarColor(2);
     } else {
         cambiarColor(1);
+        cambiarColor(2);
         usuarios.addUser(nombre, email, password);
         $('#txtName').val('');
         $('#txtEmail').val('');
@@ -68,6 +133,7 @@ function mostrarUsuario(resultado) {
         if (item.email === email && item.contraseña === password) {
             comprobarUser = 1;
             cambiarColor(1);
+            cambiarColor(2);
             console.log('existe el user');
             window.location.href = 'home.html';
         } else {
@@ -77,11 +143,12 @@ function mostrarUsuario(resultado) {
 
     if (comprobarUser === 1) {
         cambiarColor(1);
+        cambiarColor(2);
         window.location.href = 'home.html';
     } else {
         if (comprobarUser === 0) {
             cambiarColor(0);
-            console.log('alerta');
+            cambiarColor(2);
 
             const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 
@@ -132,16 +199,13 @@ function addEnvio() {
 
 function rastreo() {
     envios.loadEnvio(mostrarEnvios);
+    $('#checkEntrega').prop('disabled', false);
 }
 
+var isDelivery;
+
 function mostrarEnvios(resultado) {
-    /*envios.deleteEnvio(2);
-                                                                                                                envios.deleteEnvio(3);
-                                                                                                                envios.deleteEnvio(4);
-                                                                                                                envios.deleteEnvio(5);
-                                                                                                                envios.deleteEnvio(6);
-                                                                                                                envios.deleteEnvio(7);
-                                                                                                                envios.deleteEnvio(8);*/
+    envios.deleteEnvio(2);
     console.log(resultado.rows);
     var length = resultado.rows.length;
     var envio = [];
@@ -162,8 +226,13 @@ function mostrarEnvios(resultado) {
             envio.push(item.destinatario);
             envio.push(item.referencia);
             console.log(envio);
-
+            if (item.estatus == 'En transito') {
+                isDelivery = 0;
+            } else if (item.estatus == 'Entregado') {
+                isDelivery = 1;
+            }
             cambiarColor(1);
+            cambiarColor(2);
 
             $('#labelEstatus').prepend(
                 '<span id="estatusInfo" class="estatusInfo">' + item.estatus + '</span>'
@@ -179,18 +248,19 @@ function mostrarEnvios(resultado) {
                 '</span>'
             );
             $('#labelDestinatario').prepend(
-                '<span id="txtRemitente" class="infoEnvio">' +
+                '<span id="txtDestinatario" class="infoEnvio">' +
                 item.destinatario +
                 '</span>'
             );
             $('#labelReferencias').prepend(
-                '<span id="txtRemitente" class="infoEnvio">' +
+                '<span id="txtReferencias" class="infoEnvio">' +
                 item.referencia +
                 '</span>'
             );
         } else {
             verficacion = 0;
             cambiarColor(0);
+            cambiarColor(2);
         }
     }
 
@@ -203,10 +273,33 @@ function mostrarEnvios(resultado) {
         var referencia = envio[5].toString();
 
         cambiarColor(1);
+        cambiarColor(2);
     } else {
         if (verficacion === 0) {
             cambiarColor(0);
-            alert('Número de Guía Incorrecto o Inexistente');
+            cambiarColor(2);
+
+            const alertPlaceholder = document.getElementById(
+                'liveAlertPlaceholderAgenda'
+            );
+
+            const alert = (message, type) => {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = [
+                    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                    `   <div>${message}</div>`,
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    '</div>',
+                ].join('');
+
+                alertPlaceholder.append(wrapper);
+            };
+
+            alert('Número de Guía Incorrecto o Inexistente', 'danger');
+
+            setTimeout(function() {
+                $('.alert').fadeOut(1000);
+            }, 1500);
         }
     }
     console.log(verficacion);
@@ -219,52 +312,51 @@ function deleteUser() {
         usuarios.deleteUser(cursor.id);
         usuarios.loadUser(mostrarUsuario);
     }
-
-    $('#popupUpdateDelete').popup('close');
 }
 
-/*function addRecoleccion() {
-    var nombre = document.getElementById('txtNombreRecoleccion').value;
-    var telefono = document.getElementById('txtTelefonoRecoleccion').value;
-    var email = document.getElementById('txtEmailRecoleccion').value;
-    var coordsUbicacion = onSuccess();
-    console.log(coordsUbicacion);
-    var lat = coordsUbicacion[0];
-    var long = coordsUbicacion[1];
-    var ubicacion = 'https://www.google.com/maps/@' + lat + ',' + long + ',21z';
-
-    if (nombre == null || nombre == '') {
-        alert('Favor de ingresar el nombre');
-        cambiarColor(0);
-    } else if (telefono == null || telefono == '') {
-        alert('Favor de ingresar el teléfono');
-        cambiarColor(0);
-    } else if (email == null || email == '') {
-        alert('Favor de ingresar el email');
-        cambiarColor(0);
-    } else if (lat == null || lat == '') {
-        console.log(ubicacion);
-        alert('Favor presiona Detectar Ubicación');
-        cambiarColor(0);
+function updateEnvio() {
+    var id = 1;
+    if ((isDelivery = 0)) {
+        if (document.getElementById('checkEntrega').checked) {
+            var estatus = 'En transito';
+            envios.updateEnvio(id, estatus);
+            $('#estatusInfo').remove();
+            $('#txtRemitente').remove();
+            $('#txtDireccion').remove();
+            $('#labelDestinatario').remove();
+            $('#txtReferencias').remove();
+            rastreo();
+        } else {
+            var estatus = 'Entregado';
+            envios.updateEnvio(id, estatus);
+            $('#estatusInfo').remove();
+            $('#txtRemitente').remove();
+            $('#txtDireccion').remove();
+            $('#labelDestinatario').remove();
+            $('#txtReferencias').remove();
+            rastreo();
+        }
     } else {
-        console.log(lat);
-        console.log(long);
-        console.log(ubicacion);
-        agenda.addAgenda(nombre, telefono, email, ubicacion);
-        $('#txtNombreRecoleccion').val('');
-        $('#txtTelefonoRecoleccion').val('');
-        $('#txtEmailRecoleccion').val('');
-        cambiarColor(1);
-        window.location.href = 'home.html';
+        if (document.getElementById('checkEntrega').checked) {
+            var estatus = 'Entregado';
+            envios.updateEnvio(id, estatus);
+            $('#estatusInfo').remove();
+            $('#txtRemitente').remove();
+            $('#txtDireccion').remove();
+            $('#labelDestinatario').remove();
+            $('#txtReferencias').remove();
+            rastreo();
+        } else {
+            var estatus = 'En transito';
+            envios.updateEnvio(id, estatus);
+            $('#estatusInfo').remove();
+            $('#txtRemitente').remove();
+            $('#txtDireccion').remove();
+            $('#txtDestinatario').remove();
+            $('#txtReferencias').remove();
+            rastreo();
+        }
     }
-}*/
-
-function updateUser() {
-    var nuevoNombre = $('#txtNewName').val();
-    var nuevaCantidad = $('#txtNewQuantity').val();
-
-    usuarios.updateUser(cursor.id, nuevoNombre, nuevaCantidad);
-    $('#popupUpdateDelete').dialog('close');
 }
 
 var app = {

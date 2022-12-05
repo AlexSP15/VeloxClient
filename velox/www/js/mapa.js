@@ -76,20 +76,99 @@ function addRecoleccion() {
     var ubicacion = 'https://www.google.com/maps/@' + lat + ',' + long + ',21z';
 
     if (nombre == null || nombre == '') {
-        alert('Favor de ingresar el nombre');
+        const alertPlaceholder = document.getElementById(
+            'liveAlertPlaceholderAgenda'
+        );
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>',
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };
+
+        alert('¡Favor de ingresar el nombre!', 'warning');
+
+        setTimeout(function() {
+            $('.alert').fadeOut(1000);
+        }, 1500);
         cambiarColor(0);
         cambiarColor(2);
     } else if (telefono == null || telefono == '') {
-        alert('Favor de ingresar el teléfono');
+        const alertPlaceholder = document.getElementById(
+            'liveAlertPlaceholderAgenda'
+        );
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>',
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };
+
+        alert('¡Favor de ingresar el teléfono!', 'warning');
+
+        setTimeout(function() {
+            $('.alert').fadeOut(1000);
+        }, 1500);
         cambiarColor(0);
         cambiarColor(2);
     } else if (email == null || email == '') {
-        alert('Favor de ingresar el email');
+        const alertPlaceholder = document.getElementById(
+            'liveAlertPlaceholderAgenda'
+        );
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>',
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };
+
+        alert('¡Favor de ingresar el email!', 'warning');
+
+        setTimeout(function() {
+            $('.alert').fadeOut(1000);
+        }, 1500);
         cambiarColor(0);
         cambiarColor(2);
     } else if (lat == null || lat == '') {
-        console.log(ubicacion);
-        alert('Favor presiona Detectar Ubicación');
+        const alertPlaceholder = document.getElementById(
+            'liveAlertPlaceholderAgenda'
+        );
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>',
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };
+
+        alert('¡Favor de presionar Detectar Ubicación!', 'warning');
+
+        setTimeout(function() {
+            $('.alert').fadeOut(1000);
+        }, 1500);
         cambiarColor(0);
         cambiarColor(2);
     } else {

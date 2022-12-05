@@ -12,10 +12,51 @@ var envios = {
                 tx.executeSql(
                     'INSERT INTO envios(numeroGuia, estatus, remitente, direccion, destinatario, referencia) VALUES (?1, ?2, ?3, ?4, ?5, ?6)', [numeroGuia, estatus, remitente, direccion, destinatario, referencia],
                     function(tx, resultado) {
-                        alert('El envio se añadió correctamente');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderRastrear'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('Se añadió correctamente', 'success');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     },
                     function(tx, error) {
-                        alert('El envio no se añadió, revisa la conexión');
+                        console.log(error);
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderRastrear'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('No se añadió, revisa la conexión', 'warning');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     }
                 );
             },
@@ -33,10 +74,10 @@ var envios = {
                 tx.executeSql(
                     'DELETE FROM envios WHERE id = ?1', [id],
                     function(tx, resultado) {
-                        alert('El envio se eliminó correctamente');
+                        console.log('El envio se eliminó correctamente');
                     },
                     function(tx, error) {
-                        alert('El envio no se eliminó, revisa la conexión');
+                        console.log('El envio no se eliminó, revisa la conexión');
                     }
                 );
             },
@@ -48,32 +89,56 @@ var envios = {
             }
         );
     },
-    updateEnvio: function(
-        id,
-        numeroGuia,
-        estatus,
-        remitente,
-        direccion,
-        destinatario,
-        referencia
-    ) {
+    updateEnvio: function(id, estatus) {
         base_datos.bd.transaction(
             function(tx) {
                 tx.executeSql(
-                    'UPDATE envios SET numeroGuia = ?1, estatus = ?2, remitente = ?3, direccion = ?4, destinatario = ?5, referencia = ?6 WHERE id=?7', [
-                        numeroGuia,
-                        estatus,
-                        remitente,
-                        direccion,
-                        destinatario,
-                        referencia,
-                        id,
-                    ],
+                    'UPDATE envios SET estatus = ?1 WHERE id=?2', [estatus, id],
                     function(tx, resultado) {
-                        alert('El envio se actualizó correctamente');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderRastrear'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('El envio se actualizó correctamente', 'success');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     },
                     function(tx, error) {
-                        alert('El envio no se actualizó, revisa la conexión');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderRastrear'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('No se actualizó, revisa la conexión', 'warning');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     }
                 );
             },
@@ -94,7 +159,27 @@ var envios = {
                         mostrarEnvios(resultado);
                     },
                     function(tx, error) {
-                        alert('Carga no válida, revisa la conexión');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderRastrear'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('Carga no válida, revisa la conexión', 'warning');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     }
                 );
             },

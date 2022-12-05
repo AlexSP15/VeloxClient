@@ -13,29 +13,149 @@ var base_datos = {
             tx.executeSql(
                 'CREATE TABLE IF NOT EXISTS usuario(id integer primary key, nombre text, email text, contraseña text)', [],
                 function(tx, resultado) {
-                    alert('La base de datos ha sido creada');
+                    const alertPlaceholder = document.getElementById(
+                        'liveAlertPlaceholder'
+                    );
+
+                    const alert = (message, type) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = [
+                            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                            `   <div>${message}</div>`,
+                            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                            '</div>',
+                        ].join('');
+
+                        alertPlaceholder.append(wrapper);
+                    };
+
+                    alert('¡Cargando recursos! 1 de 3', 'success');
+
+                    setTimeout(function() {
+                        $('.alert').fadeOut(1000);
+                    }, 1500);
                 },
                 function(tx, error) {
-                    alert('No se creó la base de datos, verifica la función');
+                    const alertPlaceholder = document.getElementById(
+                        'liveAlertPlaceholder'
+                    );
+
+                    const alert = (message, type) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = [
+                            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                            `   <div>${message}</div>`,
+                            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                            '</div>',
+                        ].join('');
+
+                        alertPlaceholder.append(wrapper);
+                    };
+
+                    alert('¡Error al cargar recursos!', 'danger');
+
+                    setTimeout(function() {
+                        $('.alert').fadeOut(1000);
+                    }, 1500);
                 }
             );
             tx.executeSql(
                 'CREATE TABLE IF NOT EXISTS envios(id integer primary key, numeroGuia integer, estatus text, remitente text, direccion text, destinatario text, referencia text)', [],
                 function(tx, resultado) {
-                    alert('La base de datos ha sido creada');
+                    const alertPlaceholder = document.getElementById(
+                        'liveAlertPlaceholder'
+                    );
+
+                    const alert = (message, type) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = [
+                            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                            `   <div>${message}</div>`,
+                            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                            '</div>',
+                        ].join('');
+
+                        alertPlaceholder.append(wrapper);
+                    };
+
+                    alert('¡Cargando recursos! 2 de 3', 'success');
+
+                    setTimeout(function() {
+                        $('.alert').fadeOut(1000);
+                    }, 1500);
                 },
                 function(tx, error) {
-                    alert('No se creó la base de datos, verifica la función');
+                    const alertPlaceholder = document.getElementById(
+                        'liveAlertPlaceholder'
+                    );
+
+                    const alert = (message, type) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = [
+                            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                            `   <div>${message}</div>`,
+                            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                            '</div>',
+                        ].join('');
+
+                        alertPlaceholder.append(wrapper);
+                    };
+
+                    alert('¡Error al cargar recursos!', 'danger');
+
+                    setTimeout(function() {
+                        $('.alert').fadeOut(1000);
+                    }, 1500);
                 }
             );
 
             tx.executeSql(
                 'CREATE TABLE IF NOT EXISTS Agenda(id integer primary key, nombre text, telefono integer, email text, ubicacion text)', [],
                 function(tx, resultado) {
-                    alert('La base de datos ha sido creada');
+                    const alertPlaceholder = document.getElementById(
+                        'liveAlertPlaceholder'
+                    );
+
+                    const alert = (message, type) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = [
+                            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                            `   <div>${message}</div>`,
+                            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                            '</div>',
+                        ].join('');
+
+                        alertPlaceholder.append(wrapper);
+                    };
+
+                    alert('¡Cargando recursos! 3 de 3', 'success');
+
+                    setTimeout(function() {
+                        $('.alert').fadeOut(1000);
+                    }, 1500);
                 },
                 function(tx, error) {
-                    alert('No se creó la base de datos, verifica la función');
+                    const alertPlaceholder = document.getElementById(
+                        'liveAlertPlaceholder'
+                    );
+
+                    const alert = (message, type) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.innerHTML = [
+                            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                            `   <div>${message}</div>`,
+                            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                            '</div>',
+                        ].join('');
+
+                        alertPlaceholder.append(wrapper);
+                    };
+
+                    alert('¡Error al cargar recursos!', 'danger');
+
+                    setTimeout(function() {
+                        $('.alert').fadeOut(1000);
+                    }, 1500);
                 }
             );
         });

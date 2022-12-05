@@ -5,11 +5,51 @@ var agenda = {
                 tx.executeSql(
                     'INSERT INTO Agenda(nombre, telefono, email, ubicacion) VALUES (?1, ?2, ?3, ?4)', [nombre, telefono, email, ubicacion],
                     function(tx, resultado) {
-                        alert('Se añadió correctamente');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderAgenda'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('Se añadió correctamente', 'success');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     },
                     function(tx, error) {
                         console.log(error);
-                        alert('No se añadió, revisa la conexión');
+                        const alertPlaceholder = document.getElementById(
+                            'liveAlertPlaceholderAgenda'
+                        );
+
+                        const alert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>',
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+
+                        alert('No se añadió, revisa la conexión', 'danger');
+
+                        setTimeout(function() {
+                            $('.alert').fadeOut(1000);
+                        }, 1500);
                     }
                 );
             },
