@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="background-color: #fff !important;">
 
 <head>
     <meta charset="UTF-8">
@@ -35,7 +35,7 @@
                                     <a class="nav-link text-primary" aria-current="page" href="home.html">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-primary" href="recoleccion.html">Agendar Recolección</a>
+                                    <a class="nav-link text-primary" href="recoleccion.html">Recolección</a>
                                 </li>
                             </ul>
                         </div>
@@ -54,45 +54,49 @@
 
         <div class="card cardPrincipal">
             <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <input class="form-control txtNumGuia" type="text" placeholder="Número de Guía" aria-label="readonly input example">
+                <br>
+                <div class="row" style=" justify-content: center; ">
+                    <div class="col-auto" style=" margin-bottom: 8px; ">
+                        <input style="width: 300px !important;" class="form-control txtNumGuia" id="txtNumGuia" type="text" placeholder="Número de Guía" aria-label="readonly input example">
                     </div>
-                    <div class="col-4">
-                        <button type="button" class="btn btn-primary btnConsultar" style="background-color: #0C1059 ;">Consultar</button>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-primary btnConsultar" onclick="rastreo()" style="background-color: #0C1059 ;">Consultar</button>
                     </div>
                 </div>
                 <br>
-                <div class="row">
-                    <div class="col-auto"><span class="estatus">Estatus</span></div>
-                    <div class="col-auto"><span class="estatusInfo">En transito</span></div>
+                <div class="row" style="justify-content: center;">
+                    <div class="col-auto"><span class="estatus">Estatus:</span></div>
+                    <div class="col-auto" id="labelEstatus"></div>
                 </div>
                 <div>
                     <h1 class="titlePrin">Información del Envío</h1>
-                    <div class="row" style=" margin-bottom: 15px; ">
-                        <div class="col-2"><span class="infoEnvioLabel">Remitente: </span></div>
-                        <div class="col"><span class="infoEnvio">En transito</span></div>
+                    <div class="row" style=" margin-bottom: 15px; justify-content: center;">
+                        <div class="col-auto"><span class="infoEnvioLabel">Remitente: </span></div>
+                        <div class="col-auto" id="labelRemitente"></div>
                     </div>
-                    <div class="row" style=" margin-bottom: 15px; ">
-                        <div class="col-2"><span class="infoEnvioLabel">Dirección: </span></div>
-                        <div class="col"><span class="infoEnvio">En transito</span></div>
+                    <div class="row" style=" margin-bottom: 15px; justify-content: center;">
+                        <div class="col-auto"><span class="infoEnvioLabel">Dirección: </span></div>
+                        <div class="col-auto" id="labelDireccion"></div>
                     </div>
-                    <div class="row" style=" margin-bottom: 15px; ">
-                        <div class="col-2"><span class="infoEnvioLabel">Destinatario: </span></div>
-                        <div class="col"><span class="infoEnvio">En transito</span></div>
+                    <div class="row" style=" margin-bottom: 15px; justify-content: center;">
+                        <div class="col-auto"><span class="infoEnvioLabel">Destinatario: </span></div>
+                        <div class="col-auto" id="labelDestinatario"></div>
                     </div>
-                    <div class="row" style=" margin-bottom: 15px; ">
-                        <div class="col-2"><span class="infoEnvioLabel">Referencias: </span></div>
-                        <div class="col"><span class="infoEnvio">En transito</span></div>
+                    <div class="row" style=" margin-bottom: 15px; justify-content: center; ">
+                        <div class="col-auto"><span class="infoEnvioLabel">Referencias: </span></div>
+                        <div class="col-auto" id="labelReferencias"></div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <br><br>
+
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
         <script src="js/BD.js"></script>
         <script src="js/usuariosDB.js"></script>
+        <script src="js/enviosDB.js"></script>
 
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

@@ -1,35 +1,21 @@
-var usuarios = {
-    addUser: function(nombre, email, contraseña) {
+var envios = {
+    addEnvio: function(
+        numeroGuia,
+        estatus,
+        remitente,
+        direccion,
+        destinatario,
+        referencia
+    ) {
         base_datos.bd.transaction(
             function(tx) {
                 tx.executeSql(
-                    'INSERT INTO usuario(nombre, email, contraseña) VALUES (?1, ?2, ?3)', [nombre, email, contraseña],
+                    'INSERT INTO envios(numeroGuia, estatus, remitente, direccion, destinatario, referencia) VALUES (?1, ?2, ?3, ?4, ?5, ?6)', [numeroGuia, estatus, remitente, direccion, destinatario, referencia],
                     function(tx, resultado) {
-                        alert('El usuario se añadió correctamente');
+                        alert('El envio se añadió correctamente');
                     },
                     function(tx, error) {
-                        alert('El usuario no se añadió, revisa la conexión');
-                    }
-                );
-            },
-            function(error) {
-                alert('Tenemos un problema' + error.message);
-            },
-            function() {
-                alert('Todo bien');
-            }
-        );
-    },
-    deleteUser: function(id) {
-        base_datos.bd.transaction(
-            function(tx) {
-                tx.executeSql(
-                    'DELETE FROM usuario WHERE id = ?1', [id],
-                    function(tx, resultado) {
-                        alert('El usuario se eliminó correctamente');
-                    },
-                    function(tx, error) {
-                        alert('El usuario no se eliminó, revisa la conexión');
+                        alert('El envio no se añadió, revisa la conexión');
                     }
                 );
             },
@@ -41,16 +27,16 @@ var usuarios = {
             }
         );
     },
-    updateUser: function(id, nombre, email, contraseña) {
+    deleteEnvio: function(id) {
         base_datos.bd.transaction(
             function(tx) {
                 tx.executeSql(
-                    'UPDATE usuario SET nombre = ?1, email=?2, contraseña=?3 WHERE id=?4', [nombre, email, contraseña, id],
+                    'DELETE FROM envios WHERE id = ?1', [id],
                     function(tx, resultado) {
-                        alert('El usuario se actualizó correctamente');
+                        alert('El envio se eliminó correctamente');
                     },
                     function(tx, error) {
-                        alert('El usuario no se actualizó, revisa la conexión');
+                        alert('El envio no se eliminó, revisa la conexión');
                     }
                 );
             },
@@ -62,13 +48,50 @@ var usuarios = {
             }
         );
     },
-    loadUser: function(mostrarUsuario) {
+    updateEnvio: function(
+        id,
+        numeroGuia,
+        estatus,
+        remitente,
+        direccion,
+        destinatario,
+        referencia
+    ) {
         base_datos.bd.transaction(
             function(tx) {
                 tx.executeSql(
-                    'SELECT * FROM usuario', [],
+                    'UPDATE envios SET numeroGuia = ?1, estatus = ?2, remitente = ?3, direccion = ?4, destinatario = ?5, referencia = ?6 WHERE id=?7', [
+                        numeroGuia,
+                        estatus,
+                        remitente,
+                        direccion,
+                        destinatario,
+                        referencia,
+                        id,
+                    ],
                     function(tx, resultado) {
-                        mostrarUsuario(resultado);
+                        alert('El envio se actualizó correctamente');
+                    },
+                    function(tx, error) {
+                        alert('El envio no se actualizó, revisa la conexión');
+                    }
+                );
+            },
+            function(error) {
+                console.log('Tenemos un problema' + error.message);
+            },
+            function() {
+                console.log('Todo bien');
+            }
+        );
+    },
+    loadEnvio: function(mostrarEnvios) {
+        base_datos.bd.transaction(
+            function(tx) {
+                tx.executeSql(
+                    'SELECT * FROM envios', [],
+                    function(tx, resultado) {
+                        mostrarEnvios(resultado);
                     },
                     function(tx, error) {
                         alert('Carga no válida, revisa la conexión');
