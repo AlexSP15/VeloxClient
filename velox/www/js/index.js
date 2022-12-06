@@ -109,8 +109,9 @@ function addUser() {
         $('#txtName').val('');
         $('#txtEmail').val('');
         $('#txtPassword').val('');
-
-        window.location.href = 'index.html';
+        setTimeout(function() {
+            window.location.href = 'index.html';
+        }, 3000);
     }
 }
 
@@ -200,68 +201,75 @@ function addEnvio() {
 function rastreo() {
     envios.loadEnvio(mostrarEnvios);
     $('#checkEntrega').prop('disabled', false);
+    $('#btnRastreo').prop('disabled', true);
 }
 
 var isDelivery;
 
 function mostrarEnvios(resultado) {
-    envios.deleteEnvio(2);
     console.log(resultado.rows);
+
+    var numItem = resultado.rows.length;
+
+    for (var i = 1; i < numItem; i++) {
+        console.log(i);
+        envios.deleteEnvio(i + 1);
+    }
+
     var length = resultado.rows.length;
     var envio = [];
     var numGuia = document.getElementById('txtNumGuia').value;
 
     var verficacion = 0;
+    var item = resultado.rows.item(0);
+    if (item.estatus == 'Entregado') {
+        $('#checkEntrega').prop('checked', true);
+    } else if (item.estatus == 'En transito') {
+        $('#checkEntrega').prop('checked', false);
+    }
+    console.log(item);
 
-    for (var i = 0; i < length; i++) {
-        var item = resultado.rows.item(i);
-
-        if (item.numeroGuia == numGuia) {
-            console.log(item.numeroGuia);
-            verficacion = 1;
-            envio.push(item.numeroGuia);
-            envio.push(item.estatus);
-            envio.push(item.remitente);
-            envio.push(item.direccion);
-            envio.push(item.destinatario);
-            envio.push(item.referencia);
-            console.log(envio);
-            if (item.estatus == 'En transito') {
-                isDelivery = 0;
-            } else if (item.estatus == 'Entregado') {
-                isDelivery = 1;
-            }
-            cambiarColor(1);
-            cambiarColor(2);
-
-            $('#labelEstatus').prepend(
-                '<span id="estatusInfo" class="estatusInfo">' + item.estatus + '</span>'
-            );
-            $('#labelRemitente').prepend(
-                '<span id="txtRemitente" class="infoEnvio">' +
-                item.remitente +
-                '</span>'
-            );
-            $('#labelDireccion').prepend(
-                '<span id="txtDireccion" class="infoEnvio">' +
-                item.direccion +
-                '</span>'
-            );
-            $('#labelDestinatario').prepend(
-                '<span id="txtDestinatario" class="infoEnvio">' +
-                item.destinatario +
-                '</span>'
-            );
-            $('#labelReferencias').prepend(
-                '<span id="txtReferencias" class="infoEnvio">' +
-                item.referencia +
-                '</span>'
-            );
-        } else {
-            verficacion = 0;
-            cambiarColor(0);
-            cambiarColor(2);
+    if (item.numeroGuia == numGuia) {
+        console.log(item.numeroGuia);
+        verficacion = 1;
+        envio.push(item.numeroGuia);
+        envio.push(item.estatus);
+        envio.push(item.remitente);
+        envio.push(item.direccion);
+        envio.push(item.destinatario);
+        envio.push(item.referencia);
+        console.log(envio);
+        if (item.estatus == 'En transito') {
+            isDelivery = 0;
+        } else if (item.estatus == 'Entregado') {
+            isDelivery = 1;
         }
+        cambiarColor(1);
+        cambiarColor(2);
+
+        $('#labelEstatus').prepend(
+            '<span id="estatusInfo" class="estatusInfo">' + item.estatus + '</span>'
+        );
+        $('#labelRemitente').prepend(
+            '<span id="txtRemitente" class="infoEnvio">' + item.remitente + '</span>'
+        );
+        $('#labelDireccion').prepend(
+            '<span id="txtDireccion" class="infoEnvio">' + item.direccion + '</span>'
+        );
+        $('#labelDestinatario').prepend(
+            '<span id="txtDestinatario" class="infoEnvio">' +
+            item.destinatario +
+            '</span>'
+        );
+        $('#labelReferencias').prepend(
+            '<span id="txtReferencias" class="infoEnvio">' +
+            item.referencia +
+            '</span>'
+        );
+    } else {
+        verficacion = 0;
+        cambiarColor(0);
+        cambiarColor(2);
     }
 
     if (verficacion === 1) {
@@ -316,6 +324,7 @@ function deleteUser() {
 
 function updateEnvio() {
     var id = 1;
+    $('#checkEntrega').prop('disabled', true);
     if ((isDelivery = 0)) {
         if (document.getElementById('checkEntrega').checked) {
             var estatus = 'En transito';
@@ -323,7 +332,7 @@ function updateEnvio() {
             $('#estatusInfo').remove();
             $('#txtRemitente').remove();
             $('#txtDireccion').remove();
-            $('#labelDestinatario').remove();
+            $('#txtDestinatario').remove();
             $('#txtReferencias').remove();
             rastreo();
         } else {
@@ -332,7 +341,7 @@ function updateEnvio() {
             $('#estatusInfo').remove();
             $('#txtRemitente').remove();
             $('#txtDireccion').remove();
-            $('#labelDestinatario').remove();
+            $('#txtDestinatario').remove();
             $('#txtReferencias').remove();
             rastreo();
         }
@@ -343,7 +352,7 @@ function updateEnvio() {
             $('#estatusInfo').remove();
             $('#txtRemitente').remove();
             $('#txtDireccion').remove();
-            $('#labelDestinatario').remove();
+            $('#txtDestinatario').remove();
             $('#txtReferencias').remove();
             rastreo();
         } else {

@@ -177,11 +177,34 @@ function addRecoleccion() {
         console.log(ubicacion);
         console.log(nombre, telefono, email, ubicacion);
         agenda.addAgenda(nombre, telefono, email, ubicacion);
+        const alertPlaceholder = document.getElementById(
+            'liveAlertPlaceholderAgenda'
+        );
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>',
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };
+
+        alert('¡Recolección Registrada Correctamente!', 'success');
+
+        setTimeout(function() {
+            $('.alert').fadeOut(1000);
+        }, 3000);
         $('#txtNombreRecoleccion').val('');
         $('#txtTelefonoRecoleccion').val('');
         $('#txtEmailRecoleccion').val('');
         cambiarColor(1);
         cambiarColor(2);
-        window.location.href = 'home.html';
+        setTimeout(function() {
+            window.location.href = 'home.html';
+        }, 4500);
     }
 }

@@ -12,51 +12,10 @@ var envios = {
                 tx.executeSql(
                     'INSERT INTO envios(numeroGuia, estatus, remitente, direccion, destinatario, referencia) VALUES (?1, ?2, ?3, ?4, ?5, ?6)', [numeroGuia, estatus, remitente, direccion, destinatario, referencia],
                     function(tx, resultado) {
-                        const alertPlaceholder = document.getElementById(
-                            'liveAlertPlaceholderRastrear'
-                        );
-
-                        const alert = (message, type) => {
-                            const wrapper = document.createElement('div');
-                            wrapper.innerHTML = [
-                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-                                `   <div>${message}</div>`,
-                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                                '</div>',
-                            ].join('');
-
-                            alertPlaceholder.append(wrapper);
-                        };
-
-                        alert('Se añadió correctamente', 'success');
-
-                        setTimeout(function() {
-                            $('.alert').fadeOut(1000);
-                        }, 1500);
+                        console.log('Se añadió correctamente', 'success');
                     },
                     function(tx, error) {
-                        console.log(error);
-                        const alertPlaceholder = document.getElementById(
-                            'liveAlertPlaceholderRastrear'
-                        );
-
-                        const alert = (message, type) => {
-                            const wrapper = document.createElement('div');
-                            wrapper.innerHTML = [
-                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-                                `   <div>${message}</div>`,
-                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                                '</div>',
-                            ].join('');
-
-                            alertPlaceholder.append(wrapper);
-                        };
-
-                        alert('No se añadió, revisa la conexión', 'warning');
-
-                        setTimeout(function() {
-                            $('.alert').fadeOut(1000);
-                        }, 1500);
+                        console.log('No se añadió, revisa la conexión', 'warning');
                     }
                 );
             },
