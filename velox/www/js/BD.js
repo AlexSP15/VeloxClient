@@ -108,7 +108,6 @@ var base_datos = {
                     }, 1500);
                 }
             );
-
             tx.executeSql(
                 'CREATE TABLE IF NOT EXISTS Agenda(id integer primary key, nombre text, telefono integer, email text, ubicacion text)', [],
                 function(tx, resultado) {
